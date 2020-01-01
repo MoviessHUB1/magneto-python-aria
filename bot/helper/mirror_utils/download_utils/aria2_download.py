@@ -6,7 +6,6 @@ from bot.helper.telegram_helper.message_utils import *
 import threading
 from aria2p import API
 
-
 class AriaDownloadHelper(DownloadHelper):
 
     def __init__(self, listener):
@@ -41,6 +40,7 @@ class AriaDownloadHelper(DownloadHelper):
     def __onDownloadStopped(self, api, gid):
         if self.gid == gid:
             LOGGER.info("Called on_download_stop")
+            self._listener.onDownloadError('Download stopped by user!')
 
     def __onDownloadError(self, api, gid):
         with self._resource_lock:
